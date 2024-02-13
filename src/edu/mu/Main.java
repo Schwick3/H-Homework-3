@@ -1,9 +1,11 @@
 package edu.mu;
 
+import edu.mu.inventory.StockManagerSingleton;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	StockManagerSingleton.initializeStock("files/inventory.csv"); //this was a test
 
 	}
 
