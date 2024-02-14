@@ -63,5 +63,17 @@ public class StockManagerSingleton {
 			i++;
 		}
 	}
+	
+	public boolean updateItemPrice(MediaProduct product, double newPrice) {
+		try {
+			product.setPrice(newPrice); //Attempts to set new price, throws error otherwise
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+		}
 
 }
