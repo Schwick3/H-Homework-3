@@ -10,6 +10,10 @@ import java.io.FileNotFoundException;
 public class StockManagerSingleton {
 	protected String inventoryFilePath;
 	private static List<String[]> invList = new ArrayList<String[]>();
+	ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
+	ArrayList<MediaProduct> tapeProductList = new ArrayList<MediaProduct>();
+	ArrayList<MediaProduct> CDProductList = new ArrayList<MediaProduct>();
+	ArrayList<MediaProduct> VinylProductList = new ArrayList<MediaProduct>();
 	
 	
 	public static boolean initializeStock(String inventoryFilePath) {
@@ -74,6 +78,27 @@ public class StockManagerSingleton {
 			return false;
 		}
 	}
+	
+	public boolean removeItem(MediaProduct product) { //Has not been tested
+		Iterator<MediaProduct> productListIterator = productList.iterator(); // iterator for the passed in ArrayList
+		while(productListIterator.hasNext()) {
+			if(product.equals(productListIterator.next())) {
+				productListIterator.remove();
+				return true;
+			}
 		}
+		return false;
+	}
+	
+	//public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){ // NOT FINISHED
+	//	
+	//	ArrayList<VinylRecordProduct> vinylRecordList = new ArrayList<VinylRecordProduct>();
+	//	MediaProduct currentProduct = new MediaProduct();
+	//	Iterator<MediaProduct> productListIterator = productList.iterator();
+	//	
+	//	while(productListIterator.hasNext()) {
+	//		currentProduct = productListIterator.next();
+	//	}
+		
+	}
 
-}
