@@ -40,7 +40,7 @@ public class StockManagerSingleton {
 					//vinyl obj constructor
 				}
 				else if(_line[0].equals("Tape")) {
-					//tape obj constructor
+					TapeRecordProduct tItem = new TapeRecordProduct(_line[1], _line[2], _line[3], _line[4]);
 				}
 			}
 			
