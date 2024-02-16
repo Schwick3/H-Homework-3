@@ -13,10 +13,10 @@ import java.io.FileNotFoundException;
 public class StockManagerSingleton {
 	protected final static String inventoryFilePath = "files/inventory.csv";
 	private static List<String[]> invList = new ArrayList<String[]>();
-	ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
-	ArrayList<MediaProduct> tapeProductList = new ArrayList<MediaProduct>();
-	ArrayList<MediaProduct> CDProductList = new ArrayList<MediaProduct>();
-	ArrayList<MediaProduct> VinylProductList = new ArrayList<MediaProduct>();
+	private static ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
+	private static ArrayList<TapeRecordProduct> tapeProductList = new ArrayList<TapeRecordProduct>();
+	private static ArrayList<CDRecordProduct> CDProductList = new ArrayList<CDRecordProduct>();
+	private static ArrayList<VinylRecordProduct> vinylProductList = new ArrayList<VinylRecordProduct>();
 	
 	
 	public static boolean initializeStock() {
@@ -34,16 +34,23 @@ public class StockManagerSingleton {
 			}
 			for(String[] _line : invList) {
 				if(_line[0].equals("CD")) {
-					//CD obj constructor
+					CDRecordProduct cItem = new CDRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					productList.add(cItem);
+					CDProductList.add(cItem);
 				}
 				else if(_line[0].equals("Vinyl")) {
-					//vinyl obj constructor
+					VinylRecordProduct vItem = new VinylRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					productList.add(vItem);
+					vinylProductList.add(vItem);
 				}
 				else if(_line[0].equals("Tape")) {
 					TapeRecordProduct tItem = new TapeRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					productList.add(tItem);
+					tapeProductList.add(tItem);
 				}
 			}
 			
+		fileIn.close();		
 		return true;
 		}
 		catch(FileNotFoundException e) {
@@ -51,6 +58,7 @@ public class StockManagerSingleton {
 			return false;
 				
 			}
+		
 		
 	}
 	
