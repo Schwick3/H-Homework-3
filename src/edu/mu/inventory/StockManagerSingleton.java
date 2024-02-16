@@ -89,7 +89,17 @@ public class StockManagerSingleton {
 			return false;
 		}
 	}
-	
+	public boolean addItem(MediaProduct product) {
+		if (productList != null) {
+			productList.add(product);
+			return true;
+		}
+		else {
+			System.out.println("Could not add product to Product list");
+			return false;
+			
+		}
+	}
 	public boolean removeItem(MediaProduct product) { //Has not been tested
 		Iterator<MediaProduct> productListIterator = productList.iterator(); // iterator for the passed in ArrayList
 		while(productListIterator.hasNext()) {
@@ -100,6 +110,7 @@ public class StockManagerSingleton {
 		}
 		return false;
 	}
+	
 	public boolean saveStock() {
 		try {
 			
