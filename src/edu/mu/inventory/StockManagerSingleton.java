@@ -81,6 +81,7 @@ public class StockManagerSingleton {
 	
 	public boolean removeItem(MediaProduct product) { //Has not been tested
 		Iterator<MediaProduct> productListIterator = productList.iterator(); // iterator for the passed in ArrayList
+		
 		while(productListIterator.hasNext()) {
 			if(product.equals(productListIterator.next())) {
 				productListIterator.remove();
