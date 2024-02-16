@@ -13,10 +13,20 @@ import java.io.FileNotFoundException;
 public class StockManagerSingleton {
 	protected final static String inventoryFilePath = "files/inventory.csv";
 	private static List<String[]> invList = new ArrayList<String[]>();
+
+
 	private static ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
 	private static ArrayList<TapeRecordProduct> tapeProductList = new ArrayList<TapeRecordProduct>();
 	private static ArrayList<CDRecordProduct> CDProductList = new ArrayList<CDRecordProduct>();
 	private static ArrayList<VinylRecordProduct> vinylProductList = new ArrayList<VinylRecordProduct>();
+	
+	public static ArrayList<MediaProduct> getProductList() {
+		return productList;
+	}
+
+	public static void setProductList(ArrayList<MediaProduct> productList) {
+		StockManagerSingleton.productList = productList;
+	}
 	
 	
 	public static boolean initializeStock() {
@@ -74,7 +84,7 @@ public class StockManagerSingleton {
 		}
 		
 		while(productListIterator.hasNext()) { //iterates through passed in list
-			System.out.println("Item #" +i +":" + productListIterator.next());
+			System.out.println("Item #" +i +": " + productListIterator.next().toString());
 			i++;
 		}
 	}
@@ -141,15 +151,17 @@ public class StockManagerSingleton {
 		
 	}
 	
-	//public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){ // NOT FINISHED
-	//	
-	//	ArrayList<VinylRecordProduct> vinylRecordList = new ArrayList<VinylRecordProduct>();
-	//	MediaProduct currentProduct = new MediaProduct();
-	//	Iterator<MediaProduct> productListIterator = productList.iterator();
-	//	
-	//	while(productListIterator.hasNext()) {
-	//		currentProduct = productListIterator.next();
-	//	}
+	public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){ // NOT FINISHED
 		
+		ArrayList<VinylRecordProduct> vinylRecordList = new ArrayList<VinylRecordProduct>();
+		
+		for(MediaProduct record: productList) {
+			if(record instanceof VinylRecordProduct) {
+				vinylRecordList.add((VinylRecordProduct) record);
+			}
+		}
+		return vinylRecordList;
 	}
+	
+}
 

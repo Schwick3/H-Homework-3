@@ -20,4 +20,10 @@ public class MediaProduct {
 		this.year = Integer.parseInt(year);
 		this.genre = Genre.valueOf(genre);
 	}
+	@Override
+	public String toString() {
+		return "Title = " + title + ", Price = " + price + ", Year = " + year + ", Genre = " + genre + "]";
+	}
+	
+	
 }
