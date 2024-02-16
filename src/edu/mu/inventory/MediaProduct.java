@@ -12,4 +12,12 @@ public class MediaProduct {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	//constructor
+	public MediaProduct(String title, String price, String year, String genre) {
+		this.title = title;
+		this.price = Double.parseDouble(price);
+		this.year = Integer.parseInt(year);
+		this.genre = Genre.valueOf(genre);
+	}
 }

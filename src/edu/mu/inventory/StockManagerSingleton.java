@@ -1,6 +1,9 @@
 package edu.mu.inventory;
 
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -8,15 +11,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class StockManagerSingleton {
-	protected String inventoryFilePath;
+	protected final static String inventoryFilePath = "files/inventory.csv";
 	private static List<String[]> invList = new ArrayList<String[]>();
-	ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
-	ArrayList<MediaProduct> tapeProductList = new ArrayList<MediaProduct>();
-	ArrayList<MediaProduct> CDProductList = new ArrayList<MediaProduct>();
-	ArrayList<MediaProduct> VinylProductList = new ArrayList<MediaProduct>();
+	private static ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
+	private static ArrayList<TapeRecordProduct> tapeProductList = new ArrayList<TapeRecordProduct>();
+	private static ArrayList<CDRecordProduct> CDProductList = new ArrayList<CDRecordProduct>();
+	private static ArrayList<VinylRecordProduct> vinylProductList = new ArrayList<VinylRecordProduct>();
 	
 	
-	public static boolean initializeStock(String inventoryFilePath) {
+	public static boolean initializeStock() {
 		try {
 			Scanner fileIn = new Scanner(new FileInputStream(inventoryFilePath));
 			
@@ -31,16 +34,23 @@ public class StockManagerSingleton {
 			}
 			for(String[] _line : invList) {
 				if(_line[0].equals("CD")) {
-					//CD obj constructor
+					CDRecordProduct cItem = new CDRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					productList.add(cItem);
+					CDProductList.add(cItem);
 				}
 				else if(_line[0].equals("Vinyl")) {
-					//vinyl obj constructor
+					VinylRecordProduct vItem = new VinylRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					productList.add(vItem);
+					vinylProductList.add(vItem);
 				}
 				else if(_line[0].equals("Tape")) {
-					//tape obj constructor
+					TapeRecordProduct tItem = new TapeRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					productList.add(tItem);
+					tapeProductList.add(tItem);
 				}
 			}
 			
+		fileIn.close();		
 		return true;
 		}
 		catch(FileNotFoundException e) {
@@ -48,6 +58,7 @@ public class StockManagerSingleton {
 			return false;
 				
 			}
+		
 		
 	}
 	
@@ -78,7 +89,25 @@ public class StockManagerSingleton {
 			return false;
 		}
 	}
-	
+	public boolean addItem(MediaProduct product) {
+		try {
+			productList.add(product);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		/*if (productList != null) {
+			productList.add(product);
+			return true;
+		}
+		else {
+			System.out.println("Could not add product to Product list");
+			return false;
+			
+		}*/
+	}
 	public boolean removeItem(MediaProduct product) { //Has not been tested
 		Iterator<MediaProduct> productListIterator = productList.iterator(); // iterator for the passed in ArrayList
 		
@@ -89,6 +118,27 @@ public class StockManagerSingleton {
 			}
 		}
 		return false;
+	}
+	
+	public boolean saveStock() {
+		try {
+			
+			BufferedWriter bw = new BufferedWriter(new FileWriter(inventoryFilePath, false));
+			for(MediaProduct item: productList) {
+				bw.write(item + System.lineSeparator());
+			}
+			bw.close();
+			
+			return true;
+		}
+		
+		catch(IOException e) { 
+			e.printStackTrace();
+			return false;
+			
+		}
+		
+		
 	}
 	
 	//public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){ // NOT FINISHED

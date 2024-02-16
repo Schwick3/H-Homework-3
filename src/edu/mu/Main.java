@@ -5,7 +5,7 @@ import edu.mu.inventory.StockManagerSingleton;
 public class Main {
 
 	public static void main(String[] args) {
-	StockManagerSingleton.initializeStock("files/inventory.csv"); //this was a test
+	StockManagerSingleton.initializeStock(); //this was a test
 
 	}
 
