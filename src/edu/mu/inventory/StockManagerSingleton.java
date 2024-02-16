@@ -151,16 +151,39 @@ public class StockManagerSingleton {
 		
 	}
 	
-	public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){ // NOT FINISHED
+	public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){		
+		ArrayList<VinylRecordProduct> vinylRecordList = new ArrayList<VinylRecordProduct>(); //makes array list to be returned
 		
-		ArrayList<VinylRecordProduct> vinylRecordList = new ArrayList<VinylRecordProduct>();
-		
-		for(MediaProduct record: productList) {
-			if(record instanceof VinylRecordProduct) {
-				vinylRecordList.add((VinylRecordProduct) record);
+		for(MediaProduct record: productList) { // iterates through the passed in list
+			if(record instanceof VinylRecordProduct) { // checks if the current record is vinyl
+				vinylRecordList.add((VinylRecordProduct) record); //if so add it to the list
 			}
 		}
-		return vinylRecordList;
+		return vinylRecordList; //returns the list
+	}
+	
+	public ArrayList<CDRecordProduct> getCDRecordList (ArrayList<MediaProduct> productList){  //works the same as getVinylRecordList
+		
+		ArrayList<CDRecordProduct> CDRecordList = new ArrayList<CDRecordProduct>();
+		
+		for(MediaProduct record: productList) {
+			if(record instanceof CDRecordProduct) {
+				CDRecordList.add((CDRecordProduct) record);
+			}
+		}
+		return CDRecordList;
+	}
+	
+	public ArrayList<TapeRecordProduct> getTapeRecordList (ArrayList<MediaProduct> productList){  //works the same as getVinylRecordList
+		
+		ArrayList<TapeRecordProduct> TapeRecordList = new ArrayList<TapeRecordProduct>();
+		
+		for(MediaProduct record: productList) {
+			if(record instanceof TapeRecordProduct) {
+				TapeRecordList.add((TapeRecordProduct) record);
+			}
+		}
+		return TapeRecordList;
 	}
 	
 }
