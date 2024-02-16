@@ -90,7 +90,15 @@ public class StockManagerSingleton {
 		}
 	}
 	public boolean addItem(MediaProduct product) {
-		if (productList != null) {
+		try {
+			productList.add(product);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		/*if (productList != null) {
 			productList.add(product);
 			return true;
 		}
@@ -98,7 +106,7 @@ public class StockManagerSingleton {
 			System.out.println("Could not add product to Product list");
 			return false;
 			
-		}
+		}*/
 	}
 	public boolean removeItem(MediaProduct product) { //Has not been tested
 		Iterator<MediaProduct> productListIterator = productList.iterator(); // iterator for the passed in ArrayList
