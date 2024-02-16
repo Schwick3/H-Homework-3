@@ -1,6 +1,9 @@
 package edu.mu.inventory;
 
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class StockManagerSingleton {
-	protected String inventoryFilePath;
+	protected final static String inventoryFilePath = "files/inventory.csv";
 	private static List<String[]> invList = new ArrayList<String[]>();
 	ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
 	ArrayList<MediaProduct> tapeProductList = new ArrayList<MediaProduct>();
@@ -16,7 +19,7 @@ public class StockManagerSingleton {
 	ArrayList<MediaProduct> VinylProductList = new ArrayList<MediaProduct>();
 	
 	
-	public static boolean initializeStock(String inventoryFilePath) {
+	public static boolean initializeStock() {
 		try {
 			Scanner fileIn = new Scanner(new FileInputStream(inventoryFilePath));
 			
@@ -88,6 +91,26 @@ public class StockManagerSingleton {
 			}
 		}
 		return false;
+	}
+	public boolean saveStock() {
+		try {
+			
+			BufferedWriter bw = new BufferedWriter(new FileWriter(inventoryFilePath, false));
+			for(MediaProduct item: productList) {
+				bw.write(item + System.lineSeparator());
+			}
+			bw.close();
+			
+			return true;
+		}
+		
+		catch(IOException e) { 
+			e.printStackTrace();
+			return false;
+			
+		}
+		
+		
 	}
 	
 	//public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){ // NOT FINISHED
