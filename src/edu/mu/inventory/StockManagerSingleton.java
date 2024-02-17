@@ -44,17 +44,17 @@ public class StockManagerSingleton {
 			}
 			for(String[] _line : invList) {
 				if(_line[0].equals("CD")) {
-					CDRecordProduct cItem = new CDRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					CDRecordProduct cItem = new CDRecordProduct(_line[0], _line[1], Double.parseDouble(_line[2]), Integer.parseInt(_line[3]), Genre.valueOf(_line[4]));
 					productList.add(cItem);
 					CDProductList.add(cItem);
 				}
 				else if(_line[0].equals("Vinyl")) {
-					VinylRecordProduct vItem = new VinylRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					VinylRecordProduct vItem = new VinylRecordProduct(_line[0], _line[1], Double.parseDouble(_line[2]), Integer.parseInt(_line[3]), Genre.valueOf(_line[4]));
 					productList.add(vItem);
 					vinylProductList.add(vItem);
 				}
 				else if(_line[0].equals("Tape")) {
-					TapeRecordProduct tItem = new TapeRecordProduct(_line[1], _line[2], _line[3], _line[4]);
+					TapeRecordProduct tItem = new TapeRecordProduct(_line[0], _line[1], Double.parseDouble(_line[2]), Integer.parseInt(_line[3]), Genre.valueOf(_line[4]));
 					productList.add(tItem);
 					tapeProductList.add(tItem);
 				}
@@ -135,7 +135,7 @@ public class StockManagerSingleton {
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(inventoryFilePath, false));
 			for(MediaProduct item: productList) {
-				bw.write(item + System.lineSeparator());
+				bw.write(item.title + "," + item.price + "," + item.year + "," + item.genre + System.lineSeparator());
 			}
 			bw.close();
 			
@@ -158,7 +158,7 @@ public class StockManagerSingleton {
 		for (MediaProduct product : productList) {
 			//check if product is cheaper than the maximum price and create a copy of it if so.
 			if (product.getPrice() < maxprice) {
-				MediaProduct cheapProduct = new MediaProduct(product.getTitle(), product.getPrice()
+				MediaProduct cheapProduct = new MediaProduct(product.getMedium(), product.getTitle(), product.getPrice()
 						, product.getYear(), product.getGenre());
 				cheapList.add(cheapProduct);
 			}
