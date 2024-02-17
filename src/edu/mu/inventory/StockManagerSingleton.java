@@ -151,6 +151,24 @@ public class StockManagerSingleton {
 		
 	}
 	
+	public ArrayList<MediaProduct> getMediaProductBelowPrice (int maxprice){
+		// list to put the cheaper options in
+		ArrayList<MediaProduct> cheapList = new ArrayList<>();
+		//cycle through products
+		for (MediaProduct product : productList) {
+			//check if product is cheaper than the maximum price and create a copy of it if so.
+			if (product.getPrice() < maxprice) {
+				MediaProduct cheapProduct = new MediaProduct(product.getTitle(), product.getPrice()
+						, product.getYear(), product.getGenre());
+				cheapList.add(cheapProduct);
+			}
+			
+			
+		}
+		
+		return cheapList;
+	}
+	
 	public ArrayList<VinylRecordProduct> getVinylRecordList (ArrayList<MediaProduct> productList){		
 		ArrayList<VinylRecordProduct> vinylRecordList = new ArrayList<VinylRecordProduct>(); //makes array list to be returned
 		
