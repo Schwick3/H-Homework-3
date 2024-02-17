@@ -72,33 +72,7 @@ public class StockManagerSingleton {
 		
 	}
 	
-	public void printListOfMediaProduct(ArrayList<MediaProduct> productList) {
-		
-		ArrayList<MediaProduct> newList = new ArrayList<MediaProduct>(); //ignore this im gonna use it later - skylar
-		int i = 1; // variable to display item number
-		
-		Iterator<MediaProduct> productListIterator = productList.iterator(); // iterator for the passed in ArrayList
-		
-		if(productListIterator.hasNext() == false) { //checks to see if the list is initially empty
-			System.out.print("Error: there are not items in invtentory");
-		}
-		
-		while(productListIterator.hasNext()) { //iterates through passed in list
-			System.out.println("Item #" +i +": " + productListIterator.next().toString());
-			i++;
-		}
-	}
 	
-	public boolean updateItemPrice(MediaProduct product, double newPrice) {
-		try {
-			product.setPrice(newPrice); //Attempts to set new price, throws error otherwise
-			return true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-	}
 	public boolean addItem(MediaProduct product) {
 		try {
 			productList.add(product);
@@ -205,4 +179,3 @@ public class StockManagerSingleton {
 	}
 	
 }
-
