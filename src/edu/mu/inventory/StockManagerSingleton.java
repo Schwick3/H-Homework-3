@@ -104,6 +104,25 @@ public class StockManagerSingleton {
 		return false;
 	}
 	
+	public boolean updateItemPrice(MediaProduct product, double newPrice) {
+		try {
+			product.setPrice(newPrice); //sets price
+			return true;
+		} catch (Exception e) { //error catch
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public void printListOfMediaProduct(ArrayList<MediaProduct> productList) {
+		Iterator<MediaProduct> productListIterator = productList.iterator(); //iterator for the passed in ArrayList
+		int i = 0; //counter var
+		while(productListIterator.hasNext()) { //iterates thru list
+			System.out.println("Item #" + i +": " + productListIterator.next().toString());
+			i++; //iterates counter for item no.
+		}
+	}
+	
 	public boolean saveStock() {
 		try {
 			
